@@ -76,12 +76,12 @@ impl LedMatrixOptions {
         self.0.chain_length = chain_length as c_int;
     }
 
-    /// Sets the number of parallel chains. Valid range: [1,3].
+    /// Sets the number of parallel chains. Valid range: \[1,3\].
     pub fn set_parallel(&mut self, parallel: u32) {
         self.0.parallel = parallel as c_int;
     }
 
-    /// Sets the number of PWM bits to use. Valid range: [0,11].
+    /// Sets the number of PWM bits to use. Valid range: \[0,11\].
     ///
     /// # Errors
     /// If the given `pwm_bits` is outside the valid range
@@ -102,7 +102,7 @@ impl LedMatrixOptions {
     /// Sets the panel brightness in percent.
     ///
     /// # Errors
-    /// If the given `brightness` is not in the range [1,100].
+    /// If the given `brightness` is not in the range \[1,100\].
     pub fn set_brightness(&mut self, brightness: u8) -> LedMatrixOptionsResult {
         if (1..=100).contains(&brightness) {
             self.0.brightness = brightness as c_int;

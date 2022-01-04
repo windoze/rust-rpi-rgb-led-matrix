@@ -13,8 +13,14 @@ fn main() {
         std::process::exit(0);
     }
 
-    // link to c++ std library dylib as the c++ library depends on it
-    println!("cargo:rustc-flags=-l dylib=stdc++");
+    // link to c++ std library as the c++ library depends on it
+    if std::env::var("CARGO_FEATURE_STDCPP_STATIC_LINK").is_ok() {
+        // statically link as requested
+        println!("cargo:rustc-link-lib=static=stdc++");
+    } else {
+        // default path: dynamically link
+        println!("cargo:rustc-flags=-l dylib=stdc++");
+    }
 
     // 0. To guess at if we're on the right platform, look for linux as the system & arm as the architecture
     // Note I'm checking HOST instead of TARGET since the C++ library depends on natively linking to some libraries
